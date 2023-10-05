@@ -15,7 +15,15 @@ class Favoritecity extends StatefulWidget {
 }
 
 class FavoriteCityState extends State<Favoritecity> {
-  String Cityname = "";
+  var Cityname = "";
+  var _currentcities = [
+    'Gujrat',
+    'Maharashtra',
+    'Rajasthan',
+    'kerala',
+    'others'
+  ];
+  var _currentItemSelected = 'Select The State';
 
   @override
   Widget build(BuildContext context) {
@@ -35,6 +43,21 @@ class FavoriteCityState extends State<Favoritecity> {
                   Cityname = userInput;
                 });
               },
+            ),
+            DropdownButton<String>(
+              items: _currentcities.map((String dropDownStringItem) {
+                return DropdownMenuItem<String>(
+                  value: dropDownStringItem,
+                  child: Text(dropDownStringItem),
+                );
+              }).toList(),
+              onChanged: (newValueSelected) {
+                setState(() {
+                  this._currentItemSelected = newValueSelected!;
+                });
+              },
+
+              value: _currentItemSelected,
             ),
             Padding(
                 padding: EdgeInsets.all(30.0),
